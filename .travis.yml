@@ -10,13 +10,13 @@ script:
 
 after_success:
   - docker build -t kiwueke/multi-client ./client
-  - docker built -t kiwiueke/multi-nginx ./nginx
-  - docker built -t kiwiueke/multi-server ./server
-  - docker built -t kiwiueke/multi-worker ./worker
+  - docker built -t kiwueke/multi-nginx ./nginx
+  - docker built -t kiwueke/multi-server ./server
+  - docker built -t kiwueke/multi-worker ./worker
   #login to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #take those images and push them to docker hub
   - docker push kiwueke/multi-client
-  - docker push kiwiueke/multi-nginx
-  - docker push kiwiueke/multi-server
-  - docker push kiwiueke/multi-worker
+  - docker push kiwueke/multi-nginx
+  - docker push kiwueke/multi-server
+  - docker push kiwueke/multi-worker
