@@ -14,7 +14,7 @@ after_success:
   - docker built -t kiwiueke/multi-server ./server
   - docker built -t kiwiueke/multi-worker ./worker
   #login to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #take those images and push them to docker hub
   - docker push kiwueke/multi-client
   - docker push kiwiueke/multi-nginx
