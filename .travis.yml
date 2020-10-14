@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t kiwueke/react-test -f./client/Dockerfile.dev ./client
+
+script:
+  - docker run kiwueke/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t kiwueke/multi-client ./client
+  - docker built -t kiwiueke/multi-nginx ./nginx
+  - docker built -t kiwiueke/multi-server ./server
+  - docker built -t kiwiueke/multi-worker ./worker
+  #login to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  #take those images and push them to docker hub
+  - docker push kiwueke/multi-client
+  - docker push kiwiueke/multi-nginx
+  - docker push kiwiueke/multi-server
+  - docker push kiwiueke/multi-worker
